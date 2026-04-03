@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b1a2f;
+  color: white;
+}
+
+.header {
+  padding: 15px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.card {
+  background: #132a4a;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  border: none;
+}
+
+.progress {
+  height: 20px;
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: lime;
+}
