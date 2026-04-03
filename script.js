@@ -13,7 +13,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-db.ref("liveVideo").on("value", (snap) => {
+db.ref("liveVideo").once("value", (snap) => {
   document.getElementById("videoPlayer").src =
     "https://www.youtube.com/embed/" + snap.val();
 });
