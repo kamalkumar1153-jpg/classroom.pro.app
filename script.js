@@ -1,90 +1,57 @@
-// ==================== Firebase Configuration ====================
-const firebaseConfig = {
-  apiKey: "AIzaSyC-TQSn8FCqJ91vQVbwkhMMszxw_VvI0k",
-  authDomain: "liveclassroom-2009.firebaseapp.com",
-  databaseURL: "https://liveclassroom-2009-default-rtdb.firebaseio.com",
-  projectId: "liveclassroom-2009",
-  storageBucket: "liveclassroom-2009.firebasestorage.app",
-  messagingSenderId: "599177442621",
-  appId: "1:599177442621:web:cdf1479c4f3c31d445c154",
-  measurementId: "G-HV6QYLDN0Z"
-};
-
-// Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+// Load Video
+function loadVideo(id) {
+  document.getElementById("videoPlayer").src =
+    "https://www.youtube.com/embed/" + id;
 }
 
+// Firebase Live Class (IMPORTANT)
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  databaseURL: "YOUR_DB_URL"
+};
+
+firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// ==================== Load Live Video ====================
-function loadVideo(videoId) {
-  const player = document.getElementById("videoPlayer");
-  if (player && videoId) {
-    player.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&modestbranding=1&playsinline=1`;
-  }
-}
-
-// Load initial video + Real-time listener
-db.ref("liveVideo").on("value", (snapshot) => {
-  const videoId = snapshot.val();
-  if (videoId && typeof videoId === "string" && videoId.trim() !== "") {
-    loadVideo(videoId.trim());
-  } else {
-    loadVideo("r9n5Y9xH4mE"); // Backup Physics Video
-  }
+db.ref("liveVideo").on("value", (snap) => {
+  document.getElementById("videoPlayer").src =
+    "https://www.youtube.com/embed/" + snap.val();
 });
 
-// ==================== AI Teacher ====================
+// AI Teacher
 function askAI() {
-  const q = document.getElementById("question").value.trim().toLowerCase();
-  const ans = document.getElementById("answer");
+  let q = question.value.toLowerCase();
 
-  if (!q) {
-    ans.innerHTML = `<span style="color:red;">कृपया सवाल लिखें!</span>`;
-    return;
-  }
-
-  if (q.includes("force") || q.includes("न्यूटन")) {
-    ans.innerText = "F = m × a (न्यूटन का दूसरा नियम)";
-  } 
-  else if (q.includes("ohm") || q.includes("resistance") || q.includes("वोल्ट")) {
-    ans.innerText = "V = I × R (ओहम का नियम)";
-  } 
-  else if (q.includes("acid") || q.includes("एसिड") || q.includes("ph")) {
-    ans.innerText = "एसिड का pH 7 से कम होता है। वे नीले लिटमस पेपर को लाल कर देते हैं।";
-  } 
-  else if (q.includes("hello") || q.includes("नमस्ते") || q.includes("hi")) {
-    ans.innerText = "नमस्ते! 😊 आज क्या पढ़ रहे हैं?";
-  }
-  else {
-    ans.innerHTML = "अभी यह सवाल समझ नहीं आया।<br>Physics या Chemistry से संबंधित सवाल पूछें।";
-  }
+  if(q.includes("force")) answer.innerText = "F = m × a";
+  else if(q.includes("ohm")) answer.innerText = "V = I × R";
+  else answer.innerText = "Ask Physics / Chemistry question";
 }
 
-// ==================== Progress Tracker ====================
+// Progress
 function updateProgress() {
-  let hours = parseFloat(document.getElementById("studyInput").value);
+  let h = Number(studyInput.value);
+  let p = (h / 10) * 100;
 
-  if (isNaN(hours) || hours < 0) hours = 0;
-  if (hours > 12) hours = 12;
+  bar.style.width = p + "%";
+  percent.innerText = p + "% Done";
 
-  const percentage = (hours / 12) * 100;
-
-  document.getElementById("bar").style.width = percentage + "%";
-  document.getElementById("percent").innerText = Math.round(percentage) + "% पूरा हुआ";
-
-  // Save to localStorage
-  localStorage.setItem("studyHours", hours);
-  localStorage.setItem("studyProgress", percentage);
+  localStorage.setItem("progress", p);
 }
 
-// Load saved progress on page load
+// Load saved
 window.onload = function() {
-  const savedProgress = localStorage.getItem("studyProgress");
-  if (savedProgress) {
-    document.getElementById("bar").style.width = savedProgress + "%";
-    document.getElementById("percent").innerText = Math.round(savedProgress) + "% पूरा हुआ";
+  let p = localStorage.getItem("progress");
+  if(p){
+    bar.style.width = p + "%";
+    percent.innerText = p + "% Done";
   }
-};
+}
 
+// Notification
+function notifyUser() {
+  if (Notification.permission === "granted") {
+    new Notification("New Class Live 📚");
+  } else {
+    Notification.requestPermission();
+  }
+}
