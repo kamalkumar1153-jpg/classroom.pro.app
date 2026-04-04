@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+</head>
+
+<body>
+
+<h2>🎛️ Admin Panel</h2>
+
+<input id="phy" placeholder="Physics Video ID">
+<button onclick="update('physics', phy.value)">Update Physics</button>
+
+<br><br>
+
+<input id="chem" placeholder="Chemistry Video ID">
+<button onclick="update('chemistry', chem.value)">Update Chemistry</button>
+
+<br><br>
+
+<input id="math" placeholder="Maths Video ID">
+<button onclick="update('maths', math.value)">Update Maths</button>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  databaseURL: "YOUR_DB_URL"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function update(subject, id) {
+  db.ref("live/" + subject).set(id);
+  alert(subject + " updated!");
+}
+</script>
+
+</body>
+</html>
