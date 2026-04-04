@@ -1,5 +1,4 @@
-
-// 1. Firebase Configuration (आपके स्क्रीनशॉट 10:28 AM से)
+// ==================== Firebase Configuration ====================
 const firebaseConfig = {
   apiKey: "AIzaSyC-TQSn8FCqJ91vQVbwkhMMszxw_VvI0k",
   authDomain: "liveclassroom-2009.firebaseapp.com",
@@ -11,48 +10,81 @@ const firebaseConfig = {
   measurementId: "G-HV6QYLDN0Z"
 };
 
-// Firebase शुरू करें
+// Initialize Firebase
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
+
 const db = firebase.database();
 
-// 2. वीडियो लोड करने का फंक्शन
-function loadVideo(id) {
+// ==================== Load Live Video ====================
+function loadVideo(videoId) {
   const player = document.getElementById("videoPlayer");
-  if (player) {
-    // YouTube Embed लिंक (बिना इसके वीडियो नहीं चलेगा)
-    player.src = "https://www.youtube.com/embed/" + id + "?rel=0&autoplay=1";
+  if (player && videoId) {
+    player.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&modestbranding=1&playsinline=1`;
   }
 }
 
-// 3. ऐप खुलते ही Firebase से डेटा लेना
-db.ref("liveVideo").once("value", (snap) => {
-  if (snap.exists() && snap.val() !== "") {
-    loadVideo(snap.val()); // यह आपके डेटाबेस की ID (dQw4w9WgXcQ) को लोड करेगा
+// Load initial video + Real-time listener
+db.ref("liveVideo").on("value", (snapshot) => {
+  const videoId = snapshot.val();
+  if (videoId && typeof videoId === "string" && videoId.trim() !== "") {
+    loadVideo(videoId.trim());
   } else {
-    loadVideo('r9n5Y9xH4mE'); // बैकअप के लिए Physics वीडियो
+    loadVideo("r9n5Y9xH4mE"); // Backup Physics Video
   }
 });
 
-// 4. AI Teacher (बेसिक सवाल)
+// ==================== AI Teacher ====================
 function askAI() {
-  let q = document.getElementById("question").value.toLowerCase();
-  let ans = document.getElementById("answer");
+  const q = document.getElementById("question").value.trim().toLowerCase();
+  const ans = document.getElementById("answer");
 
-  if(q.includes("force")) ans.innerText = "F = m × a";
-  else if(q.includes("ohm")) ans.innerText = "V = I × R";
-  else if(q.includes("acid")) ans.innerText = "Acids have pH < 7";
-  else ans.innerText = "कृपया Physics/Chemistry का सवाल पूछें।";
+  if (!q) {
+    ans.innerHTML = `<span style="color:red;">कृपया सवाल लिखें!</span>`;
+    return;
+  }
+
+  if (q.includes("force") || q.includes("न्यूटन")) {
+    ans.innerText = "F = m × a (न्यूटन का दूसरा नियम)";
+  } 
+  else if (q.includes("ohm") || q.includes("resistance") || q.includes("वोल्ट")) {
+    ans.innerText = "V = I × R (ओहम का नियम)";
+  } 
+  else if (q.includes("acid") || q.includes("एसिड") || q.includes("ph")) {
+    ans.innerText = "एसिड का pH 7 से कम होता है। वे नीले लिटमस पेपर को लाल कर देते हैं।";
+  } 
+  else if (q.includes("hello") || q.includes("नमस्ते") || q.includes("hi")) {
+    ans.innerText = "नमस्ते! 😊 आज क्या पढ़ रहे हैं?";
+  }
+  else {
+    ans.innerHTML = "अभी यह सवाल समझ नहीं आया।<br>Physics या Chemistry से संबंधित सवाल पूछें।";
+  }
 }
 
-// 5. प्रोग्रेस ट्रैकर
+// ==================== Progress Tracker ====================
 function updateProgress() {
-  let h = Number(document.getElementById("studyInput").value);
-  let p = Math.min((h / 12) * 100, 100); 
+  let hours = parseFloat(document.getElementById("studyInput").value);
 
-  document.getElementById("bar").style.width = p + "%";
-  document.getElementById("percent").innerText = Math.round(p) + "% पूरा हुआ";
-  localStorage.setItem("progress", p);
+  if (isNaN(hours) || hours < 0) hours = 0;
+  if (hours > 12) hours = 12;
+
+  const percentage = (hours / 12) * 100;
+
+  document.getElementById("bar").style.width = percentage + "%";
+  document.getElementById("percent").innerText = Math.round(percentage) + "% पूरा हुआ";
+
+  // Save to localStorage
+  localStorage.setItem("studyHours", hours);
+  localStorage.setItem("studyProgress", percentage);
 }
+
+// Load saved progress on page load
+window.onload = function() {
+  const savedProgress = localStorage.getItem("studyProgress");
+  if (savedProgress) {
+    document.getElementById("bar").style.width = savedProgress + "%";
+    document.getElementById("percent").innerText = Math.round(savedProgress) + "% पूरा हुआ";
+  }
+};
 
