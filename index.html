@@ -1,60 +1,148 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Classroom PRO - 12th Science</title>
+<title>Live Classroom PRO - Class 12 Science (2026)</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  /* Extra responsive video style (style.css mein bhi daal sakte ho) */
-  .card iframe {
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+  }
+  .video-item {
+    background: #f8f9fa;
+    padding: 15px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .video-item h4 {
+    margin: 8px 0 12px 0;
+    font-size: 15.5px;
+    color: #222;
   }
   button {
     margin: 8px 5px;
-    padding: 12px 20px;
-    font-size: 16px;
+    padding: 12px 18px;
+    font-size: 15px;
     cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+  }
+  .subject-tabs {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 12px 25px;
+    margin: 5px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  .tab-btn.active {
+    background: #0056b3;
+  }
+  .card iframe {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
   }
 </style>
 </head>
 
 <body>
 
-<div class="header">🎓 LIVE CLASSROOM PRO - Class 12 Science (2026)</div>
+<div class="header">🎓 LIVE CLASSROOM PRO - Class 12 Science (Boards 2026)</div>
 
 <!-- LIVE VIDEO SECTION -->
 <div class="card">
-  <h3>📺 Live / Featured Class</h3>
-  <iframe id="videoPlayer" width="100%" height="400" 
+  <h3>📺 Featured / Live Class</h3>
+  <iframe id="videoPlayer" width="100%" height="420" 
+    src="https://www.youtube.com/embed/U_TVhyuaSjs" 
     frameborder="0" allowfullscreen></iframe>
   <p style="margin-top:10px; font-size:14px; color:#555;">
-    <strong>Default:</strong> Physics Wallah - Complete Physics One Shot (Boards 2026)
+    <strong>Default:</strong> Complete Class 12 Physics One Shot (Best for Quick Revision)
   </p>
 </div>
 
-<!-- SUBJECT BUTTONS - Best Videos -->
+<!-- SUBJECT TABS -->
 <div class="card">
-  <h3>📚 Choose Subject - Best One Shot Videos</h3>
-  
-  <button onclick="loadVideo('U_TVhyuaSjs')">Physics - Complete Class 12 Physics One Shot (PW)</button>
-  
-  <button onclick="loadVideo('9nU2YZ2HVPA')">Physics - Electric Charges & Fields One Shot (NCERT Wallah)</button>
-  
-  <button onclick="loadVideo('NpW-f7n0YIo')">Physics - Modern Physics Marathon (NCERT Wallah)</button>
-  
-  <button onclick="loadVideo('W7v7yc40zo0')">Chemistry - Coordination Compounds One Shot (Bharat Panchal)</button>
-  
-  <button onclick="loadVideo('CpSJZnXXf6M')">Chemistry - Chemical Kinetics One Shot (Bharat Panchal)</button>
-  
-  <button onclick="loadVideo('nbruaXpyTjk')">Maths - Complete Book 1 Marathon (Boards 2026)</button>
+  <h3>📚 Chapter-wise Best One Shot Videos</h3>
+  <div class="subject-tabs">
+    <button class="tab-btn active" onclick="showSection('physics')">Physics</button>
+    <button class="tab-btn" onclick="showSection('chemistry')">Chemistry</button>
+  </div>
+
+  <!-- Physics Section - More Complete Chapters -->
+  <div id="physics-section" class="video-grid">
+    <div class="video-item">
+      <h4>Ch 1: Electric Charges and Fields</h4>
+      <button onclick="loadVideo('9nU2YZ2HVPA')">One Shot (VIJETA 2026 - NCERT Wallah)</button>
+    </div>
+    <div class="video-item">
+      <h4>Ch 2: Electrostatic Potential & Capacitance</h4>
+      <button onclick="loadVideo('2tG-hx2JHr8')">One Shot (Akshay Sir)</button>
+    </div>
+    <div class="video-item">
+      <h4>Ch 3: Current Electricity</h4>
+      <button onclick="loadVideo('mxFAn1b2-r8')">One Shot (Part of Marathon - Akshay Sir)</button>
+    </div>
+    <div class="video-item">
+      <h4>Ch 4-7: Moving Charges, Magnetism, EMI, AC</h4>
+      <button onclick="loadVideo('U_TVhyuaSjs')">Combined One Shot (Highly Recommended)</button>
+    </div>
+    <div class="video-item">
+      <h4>Ch 9: Ray Optics & Optical Instruments</h4>
+      <button onclick="loadVideo('TLuUGHdcs2E')">One Shot Revision (Akshay Sir)</button>
+    </div>
+    <div class="video-item">
+      <h4>Ch 11-13: Dual Nature, Atoms & Nuclei (Modern Physics)</h4>
+      <button onclick="loadVideo('NpW-f7n0YIo')">Complete Modern Physics One Shot (Akshay Sir)</button>
+    </div>
+    <div class="video-item">
+      <h4>Full Physics Complete Revision (All Chapters)</h4>
+      <button onclick="loadVideo('J1rwarsEtN0')">Complete Physics in One Video (Boards 2026)</button>
+    </div>
+    <div class="video-item">
+      <h4>Full Physics Book-1 Marathon</h4>
+      <button onclick="loadVideo('GtN6qRR78A8')">All Chapters Revision (Akshay Sir)</button>
+    </div>
+  </div>
+
+  <!-- Chemistry Section -->
+  <div id="chemistry-section" class="video-grid" style="display: none;">
+    <div class="video-item">
+      <h4>Ch 1: Solutions</h4>
+      <button onclick="loadVideo('0M3kJJid0Rc')">One Shot (Bharat Panchal)</button>
+    </div>
+    <div class="video-item">
+      <h4>Ch 3: Chemical Kinetics</h4>
+      <button onclick="loadVideo('CpSJZnXXf6M')">One Shot (Bharat Panchal)</button>
+    </div>
+    <div class="video-item">
+      <h4>Ch 4: d and f Block Elements</h4>
+      <button onclick="loadVideo('zZ3kpW3XiqQ')">One Shot (Bharat Panchal)</button>
+    </div>
+    <div class="video-item">
+      <h4>Ch 9: Coordination Compounds</h4>
+      <button onclick="loadVideo('W7v7yc40zo0')">One Shot (Bharat Panchal - Boards 2026)</button>
+    </div>
+    <div class="video-item">
+      <h4>Full Chemistry Revision</h4>
+      <button onclick="loadVideo('3j0eU9cIOEE')">Complete Syllabus (Bharat Panchal)</button>
+    </div>
+  </div>
 </div>
 
-<!-- AI TEACHER (pura rakh diya) -->
+<!-- AI TEACHER -->
 <div class="card">
   <h3>🤖 AI Teacher</h3>
-  <input id="question" placeholder="Ask any doubt (e.g. What is Coulomb's law?)">
+  <input id="question" placeholder="Ask any doubt (e.g. Derive Gauss's theorem)">
   <button onclick="askAI()">Ask AI</button>
   <p id="answer"></p>
 </div>
@@ -64,7 +152,6 @@
   <h3>📊 Study Progress</h3>
   <input id="studyInput" placeholder="Hours studied today">
   <button onclick="updateProgress()">Update</button>
-
   <div class="progress">
     <div id="bar" class="progress-bar"></div>
   </div>
@@ -83,6 +170,16 @@
 function loadVideo(videoId) {
   const player = document.getElementById('videoPlayer');
   player.src = `https://www.youtube.com/embed/${videoId}`;
+}
+
+// Tab switching
+function showSection(subject) {
+  document.getElementById('physics-section').style.display = subject === 'physics' ? 'grid' : 'none';
+  document.getElementById('chemistry-section').style.display = subject === 'chemistry' ? 'grid' : 'none';
+  
+  const tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  event.currentTarget.classList.add('active');
 }
 </script>
 
