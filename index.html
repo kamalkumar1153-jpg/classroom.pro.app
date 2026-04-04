@@ -1,55 +1,90 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Classroom PRO</title>
+<title>Live Classroom PRO - 12th Science</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Extra responsive video style (style.css mein bhi daal sakte ho) */
+  .card iframe {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  }
+  button {
+    margin: 8px 5px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
 </head>
 
 <body>
 
-<div class="header">🎓 LIVE CLASSROOM PRO</div>
+<div class="header">🎓 LIVE CLASSROOM PRO - Class 12 Science (2026)</div>
 
-<!-- LIVE VIDEO -->
+<!-- LIVE VIDEO SECTION -->
 <div class="card">
-<h3>📺 Live Class</h3>
-<iframe id="videoPlayer" width="100%" height="220"
-frameborder="0" allowfullscreen></iframe>
+  <h3>📺 Live / Featured Class</h3>
+  <iframe id="videoPlayer" width="100%" height="400" 
+    frameborder="0" allowfullscreen></iframe>
+  <p style="margin-top:10px; font-size:14px; color:#555;">
+    <strong>Default:</strong> Physics Wallah - Complete Physics One Shot (Boards 2026)
+  </p>
 </div>
 
-<!-- SUBJECT BUTTONS -->
+<!-- SUBJECT BUTTONS - Best Videos -->
 <div class="card">
-<button onclick="loadVideo('dQw4w9WgXcQ')">Physics</button>
-<button onclick="loadVideo('3JZ_D3ELwOQ')">Chemistry</button>
-<button onclick="loadVideo('ysz5S6PUM-U')">Maths</button>
+  <h3>📚 Choose Subject - Best One Shot Videos</h3>
+  
+  <button onclick="loadVideo('U_TVhyuaSjs')">Physics - Complete Class 12 Physics One Shot (PW)</button>
+  
+  <button onclick="loadVideo('9nU2YZ2HVPA')">Physics - Electric Charges & Fields One Shot (NCERT Wallah)</button>
+  
+  <button onclick="loadVideo('NpW-f7n0YIo')">Physics - Modern Physics Marathon (NCERT Wallah)</button>
+  
+  <button onclick="loadVideo('W7v7yc40zo0')">Chemistry - Coordination Compounds One Shot (Bharat Panchal)</button>
+  
+  <button onclick="loadVideo('CpSJZnXXf6M')">Chemistry - Chemical Kinetics One Shot (Bharat Panchal)</button>
+  
+  <button onclick="loadVideo('nbruaXpyTjk')">Maths - Complete Book 1 Marathon (Boards 2026)</button>
 </div>
 
-<!-- AI TEACHER -->
+<!-- AI TEACHER (pura rakh diya) -->
 <div class="card">
-<h3>🤖 AI Teacher</h3>
-<input id="question" placeholder="Ask question">
-<button onclick="askAI()">Ask</button>
-<p id="answer"></p>
+  <h3>🤖 AI Teacher</h3>
+  <input id="question" placeholder="Ask any doubt (e.g. What is Coulomb's law?)">
+  <button onclick="askAI()">Ask AI</button>
+  <p id="answer"></p>
 </div>
 
 <!-- PROGRESS -->
 <div class="card">
-<h3>📊 Study Progress</h3>
-<input id="studyInput" placeholder="Hours">
-<button onclick="updateProgress()">Update</button>
+  <h3>📊 Study Progress</h3>
+  <input id="studyInput" placeholder="Hours studied today">
+  <button onclick="updateProgress()">Update</button>
 
-<div class="progress">
-<div id="bar" class="progress-bar"></div>
-</div>
-
-<p id="percent"></p>
+  <div class="progress">
+    <div id="bar" class="progress-bar"></div>
+  </div>
+  <p id="percent">0% Complete</p>
 </div>
 
 <!-- NOTIFICATION -->
 <div class="card">
-<button onclick="notifyUser()">🔔 Test Notification</button>
+  <button onclick="notifyUser()">🔔 Test Reminder Notification</button>
 </div>
 
 <script src="script.js"></script>
+
+<script>
+// Video load function
+function loadVideo(videoId) {
+  const player = document.getElementById('videoPlayer');
+  player.src = `https://www.youtube.com/embed/${videoId}`;
+}
+</script>
+
 </body>
 </html>
