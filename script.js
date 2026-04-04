@@ -6,8 +6,9 @@ function loadVideo(id) {
 
 // Firebase Live Class (IMPORTANT)
 const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  databaseURL: "YOUR_DB_URL"
+  apiKey: ""https://liveclassroom-2009-default-rtdb.firebaseio.com
+  
+  databaseURL: """https://liveclassroom-2009-default-rtdb.firebaseio.com
 };
 
 firebase.initializeApp(firebaseConfig);
