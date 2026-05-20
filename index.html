@@ -1,187 +1,299 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Classroom PRO - Class 12 Science (2026)</title>
-<link rel="stylesheet" href="style.css">
-<style>
-  .video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
-  }
-  .video-item {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  .video-item h4 {
-    margin: 8px 0 12px 0;
-    font-size: 15.5px;
-    color: #222;
-  }
-  button {
-    margin: 8px 5px;
-    padding: 12px 18px;
-    font-size: 15px;
-    cursor: pointer;
-    border-radius: 8px;
-    width: 100%;
-  }
-  .subject-tabs {
-    display: flex;
-    justify-content: center;
-    margin: 15px 0;
-    flex-wrap: wrap;
-  }
-  .tab-btn {
-    padding: 12px 25px;
-    margin: 5px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-  }
-  .tab-btn.active {
-    background: #0056b3;
-  }
-  .card iframe {
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Vault Pro</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: #0f172a; }
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+    </style>
 </head>
+<body class="text-slate-100 min-h-screen pb-24">
 
-<body>
+    <header class="bg-slate-800 sticky top-0 z-40 border-b border-slate-700 px-4 py-4">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-emerald-400 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap"></i> Study Vault Pro
+                </h1>
+                <p class="text-xs text-slate-400 mt-0.5">Target: 12th Boards & NEET 🩺</p>
+            </div>
+            <div class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full border border-emerald-500/30 font-bold uppercase">PCB Mode</div>
+        </div>
+    </header>
 
-<div class="header">🎓 LIVE CLASSROOM PRO - Class 12 Science (Boards 2026)</div>
+    <div id="view-home" class="view-section active space-y-6 pt-4">
+        <main class="max-w-md mx-auto px-4 space-y-6">
+            <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 p-5 rounded-2xl shadow-lg">
+                <span class="bg-amber-400 text-slate-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Self Study Hub</span>
+                <h2 class="text-lg font-bold mt-1 text-white">RBSE Class 12 Syllabus</h2>
+                <p class="text-xs text-slate-200 mt-1">Apna subject select karke direct notes, quiz aur official online study links access karein.</p>
+            </div>
 
-<!-- LIVE VIDEO SECTION -->
-<div class="card">
-  <h3>📺 Featured / Live Class</h3>
-  <iframe id="videoPlayer" width="100%" height="420" 
-    src="https://www.youtube.com/embed/U_TVhyuaSjs" 
-    frameborder="0" allowfullscreen></iframe>
-  <p style="margin-top:10px; font-size:14px; color:#555;">
-    <strong>Default:</strong> Complete Class 12 Physics One Shot (Best for Quick Revision)
-  </p>
-</div>
+            <section class="space-y-3">
+                <h2 class="font-bold text-sm text-slate-400 uppercase tracking-wider px-1">
+                    <i class="fa-solid fa-book-bookmark text-blue-400 mr-1"></i> Select Subject
+                </h2>
+                
+                <div onclick="openLibrary('physics')" class="bg-slate-800 border border-slate-700 rounded-2xl p-4 flex justify-between items-center cursor-pointer hover:border-blue-500">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-xl text-blue-400"><i class="fa-solid fa-atom"></i></div>
+                        <div>
+                            <h3 class="font-bold text-base">Physics</h3>
+                            <p class="text-xs text-slate-400">12th RBSE Notes & Formulas</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-500 mr-2"></i>
+                </div>
 
-<!-- SUBJECT TABS -->
-<div class="card">
-  <h3>📚 Chapter-wise Best One Shot Videos</h3>
-  <div class="subject-tabs">
-    <button class="tab-btn active" onclick="showSection('physics')">Physics</button>
-    <button class="tab-btn" onclick="showSection('chemistry')">Chemistry</button>
-  </div>
+                <div onclick="openLibrary('chemistry')" class="bg-slate-800 border border-slate-700 rounded-2xl p-4 flex justify-between items-center cursor-pointer hover:border-amber-500">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-xl text-amber-400"><i class="fa-solid fa-flask-vial"></i></div>
+                        <div>
+                            <h3 class="font-bold text-base">Chemistry</h3>
+                            <p class="text-xs text-slate-400">Organic, Inorganic & Physical</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-500 mr-2"></i>
+                </div>
 
-  <!-- Physics Section - More Complete Chapters -->
-  <div id="physics-section" class="video-grid">
-    <div class="video-item">
-      <h4>Ch 1: Electric Charges and Fields</h4>
-      <button onclick="loadVideo('9nU2YZ2HVPA')">One Shot (VIJETA 2026 - NCERT Wallah)</button>
+                <div onclick="openLibrary('biology')" class="bg-slate-800 border border-slate-700 rounded-2xl p-4 flex justify-between items-center cursor-pointer hover:border-emerald-500">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xl text-emerald-400"><i class="fa-solid fa-dna"></i></div>
+                        <div>
+                            <h3 class="font-bold text-base">Biology</h3>
+                            <p class="text-xs text-slate-400">Botany & Zoology High-Weightage Chapters</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-500 mr-2"></i>
+                </div>
+            </section>
+        </main>
     </div>
-    <div class="video-item">
-      <h4>Ch 2: Electrostatic Potential & Capacitance</h4>
-      <button onclick="loadVideo('2tG-hx2JHr8')">One Shot (Akshay Sir)</button>
-    </div>
-    <div class="video-item">
-      <h4>Ch 3: Current Electricity</h4>
-      <button onclick="loadVideo('mxFAn1b2-r8')">One Shot (Part of Marathon - Akshay Sir)</button>
-    </div>
-    <div class="video-item">
-      <h4>Ch 4-7: Moving Charges, Magnetism, EMI, AC</h4>
-      <button onclick="loadVideo('U_TVhyuaSjs')">Combined One Shot (Highly Recommended)</button>
-    </div>
-    <div class="video-item">
-      <h4>Ch 9: Ray Optics & Optical Instruments</h4>
-      <button onclick="loadVideo('TLuUGHdcs2E')">One Shot Revision (Akshay Sir)</button>
-    </div>
-    <div class="video-item">
-      <h4>Ch 11-13: Dual Nature, Atoms & Nuclei (Modern Physics)</h4>
-      <button onclick="loadVideo('NpW-f7n0YIo')">Complete Modern Physics One Shot (Akshay Sir)</button>
-    </div>
-    <div class="video-item">
-      <h4>Full Physics Complete Revision (All Chapters)</h4>
-      <button onclick="loadVideo('J1rwarsEtN0')">Complete Physics in One Video (Boards 2026)</button>
-    </div>
-    <div class="video-item">
-      <h4>Full Physics Book-1 Marathon</h4>
-      <button onclick="loadVideo('GtN6qRR78A8')">All Chapters Revision (Akshay Sir)</button>
-    </div>
-  </div>
 
-  <!-- Chemistry Section -->
-  <div id="chemistry-section" class="video-grid" style="display: none;">
-    <div class="video-item">
-      <h4>Ch 1: Solutions</h4>
-      <button onclick="loadVideo('0M3kJJid0Rc')">One Shot (Bharat Panchal)</button>
+    <div id="view-notes" class="view-section space-y-4 pt-4">
+        <main class="max-w-md mx-auto px-4 space-y-4">
+            <div class="flex items-center justify-between px-1">
+                <h2 id="subject-title" class="font-bold text-base text-amber-400">Chapters Index</h2>
+                <button onclick="switchTab('home')" class="text-xs bg-slate-800 px-3 py-1 rounded-lg border border-slate-700 text-slate-300">All Subjects</button>
+            </div>
+            <div id="self-study-banner" class="bg-slate-800 border border-dashed border-emerald-500/40 p-4 rounded-xl text-center"></div>
+            <div id="chapters-list-container" class="space-y-4"></div>
+        </main>
     </div>
-    <div class="video-item">
-      <h4>Ch 3: Chemical Kinetics</h4>
-      <button onclick="loadVideo('CpSJZnXXf6M')">One Shot (Bharat Panchal)</button>
+
+    <div id="view-quiz" class="view-section space-y-4 pt-4">
+        <main class="max-w-md mx-auto px-4 space-y-4">
+            <div class="bg-slate-800 border border-slate-700 p-4 rounded-2xl flex justify-between items-center sticky top-[76px] z-30 shadow-md">
+                <div>
+                    <h2 class="font-bold text-sm text-amber-400"><i class="fa-solid fa-stopwatch mr-1"></i> NEET Test Terminal</h2>
+                    <p id="quiz-context" class="text-[11px] text-slate-400 mt-0.5">Select a chapter from Notes to load quiz</p>
+                </div>
+                <button onclick="submitQuiz()" id="quiz-submit-btn" class="hidden bg-emerald-600 text-white text-xs px-3 py-2 rounded-xl font-bold shadow-md">Submit</button>
+            </div>
+            <div id="quiz-questions-container" class="space-y-4">
+                <div class="text-center py-12 text-slate-500 text-sm">Pehle kisi chapter ka <b>"Take Quiz"</b> button select karein!</div>
+            </div>
+        </main>
     </div>
-    <div class="video-item">
-      <h4>Ch 4: d and f Block Elements</h4>
-      <button onclick="loadVideo('zZ3kpW3XiqQ')">One Shot (Bharat Panchal)</button>
+
+    <div id="view-ai" class="view-section flex flex-col h-[calc(100vh-160px)] pt-4">
+        <main class="max-w-md mx-auto w-full flex flex-col h-full bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+            <div class="bg-slate-800 border-b border-slate-700 p-3 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-robot text-purple-400"></i>
+                    <div>
+                        <h3 class="text-xs font-bold text-purple-400">AI Doubt Guru</h3>
+                        <p id="ai-context" class="text-[9px] text-slate-400">Context: Global Mode</p>
+                    </div>
+                </div>
+            </div>
+            <div id="chat-box" class="flex-1 overflow-y-auto p-3 space-y-3 text-sm">
+                <div class="bg-slate-800 p-3 rounded-2xl max-w-[85%] border border-slate-700/50">Aap mujhse 12th Board aur NEET level ka koi bhi doubt pooch sakte hain! 👍</div>
+            </div>
+            <div class="p-2 bg-slate-800 border-t border-slate-700 flex gap-2">
+                <input type="text" id="user-query" placeholder="Apna doubt type karein..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                <button onclick="askAI()" class="bg-purple-600 text-white px-4 py-2 rounded-xl text-xs font-bold"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </main>
     </div>
-    <div class="video-item">
-      <h4>Ch 9: Coordination Compounds</h4>
-      <button onclick="loadVideo('W7v7yc40zo0')">One Shot (Bharat Panchal - Boards 2026)</button>
-    </div>
-    <div class="video-item">
-      <h4>Full Chemistry Revision</h4>
-      <button onclick="loadVideo('3j0eU9cIOEE')">Complete Syllabus (Bharat Panchal)</button>
-    </div>
-  </div>
-</div>
 
-<!-- AI TEACHER -->
-<div class="card">
-  <h3>🤖 AI Teacher</h3>
-  <input id="question" placeholder="Ask any doubt (e.g. Derive Gauss's theorem)">
-  <button onclick="askAI()">Ask AI</button>
-  <p id="answer"></p>
-</div>
+    <nav class="fixed bottom-0 left-0 right-0 bg-slate-800 border-t border-slate-700 z-50">
+        <div class="max-w-md mx-auto grid grid-cols-4 text-center py-2">
+            <button onclick="switchTab('home')" id="btn-nav-home" class="flex flex-col items-center gap-1 text-emerald-400"><i class="fa-solid fa-house text-sm"></i><span class="text-[10px]">Home</span></button>
+            <button onclick="switchTab('notes')" id="btn-nav-notes" class="flex flex-col items-center gap-1 text-slate-400"><i class="fa-solid fa-file-lines text-sm"></i><span class="text-[10px]">Notes</span></button>
+            <button onclick="switchTab('quiz')" id="btn-nav-quiz" class="flex flex-col items-center gap-1 text-slate-400"><i class="fa-solid fa-square-poll-vertical text-sm"></i><span class="text-[10px]">Quiz</span></button>
+            <button onclick="switchTab('ai')" id="btn-nav-ai" class="flex flex-col items-center gap-1 text-slate-400"><i class="fa-solid fa-robot text-sm"></i><span class="text-[10px]">AI Chat</span></button>
+        </div>
+    </nav>
 
-<!-- PROGRESS -->
-<div class="card">
-  <h3>📊 Study Progress</h3>
-  <input id="studyInput" placeholder="Hours studied today">
-  <button onclick="updateProgress()">Update</button>
-  <div class="progress">
-    <div id="bar" class="progress-bar"></div>
-  </div>
-  <p id="percent">0% Complete</p>
-</div>
+    <script>
+        const GEMINI_API_KEY = "AIzaSyDse7gFpC8baZJBPT55MQUM6bShQmnbMDU";
 
-<!-- NOTIFICATION -->
-<div class="card">
-  <button onclick="notifyUser()">🔔 Test Reminder Notification</button>
-</div>
+        const selfStudyLinks = {
+            physics: "https://www.selfstudys.com/state-board/rajasthan/class-12th/physics",
+            chemistry: "https://www.selfstudys.com/state-board/rajasthan/class-12th/chemistry",
+            biology: "https://www.selfstudys.com/state-board/rajasthan/class-12th/biology"
+        };
 
-<script src="script.js"></script>
+        const studyDatabase = {
+            physics: [{
+                title: "Electric Charges and Fields",
+                formula: "F = k * (q1 * q2) / r² | E = F / q",
+                notes: "Charge is quantized: q = ±ne. Total electric flux through a closed surface is given by Gauss's Law: Φ = Q / ε₀.",
+                quiz: [
+                    { q: "What is the core SI unit of electric flux?", a: ["N m² C⁻¹", "N C m⁻²", "Volt / meter", "Ohm meter"], correct: 0 },
+                    { q: "Dielectric constant of pure water is approx:", a: ["1", "Infinite", "80", "1.2"], correct: 2 }
+                ]
+            }],
+            chemistry: [{
+                title: "Solutions",
+                formula: "Molarity (M) = Moles / Vol (L) | p = p° * x",
+                notes: "Vapour pressure decreases when a non-volatile solute is added. Osmotic pressure is given by equation Π = CRT.",
+                quiz: [
+                    { q: "Which property is independent of temperature changes?", a: ["Molarity", "Normality", "Molality", "Formality"], correct: 2 }
+                ]
+            }],
+            biology: [{
+                title: "Human Reproduction",
+                formula: "High NEET Weightage | Diagram Important",
+                notes: "Spermatogenesis occurs in seminiferous tubules. Oogenesis is initiated during the embryonic development stage.",
+                quiz: [
+                    { q: "Which hormone triggers ovulation?", a: ["LH", "FSH", "Progesterone", "Estrogen"], correct: 0 }
+                ]
+            }]
+        };
 
-<script>
-// Video load function
-function loadVideo(videoId) {
-  const player = document.getElementById('videoPlayer');
-  player.src = `https://www.youtube.com/embed/${videoId}`;
-}
+        const masterSyllabusIndex = { physics: ["Electric Charges and Fields"], chemistry: ["Solutions"], biology: ["Human Reproduction"] };
+        let currentSubject = "physics"; let currentChapter = "Electric Charges and Fields"; let ActiveQuizQuestions = [];
 
-// Tab switching
-function showSection(subject) {
-  document.getElementById('physics-section').style.display = subject === 'physics' ? 'grid' : 'none';
-  document.getElementById('chemistry-section').style.display = subject === 'chemistry' ? 'grid' : 'none';
-  
-  const tabs = document.querySelectorAll('.tab-btn');
-  tabs.forEach(tab => tab.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-}
-</script>
+        function switchTab(viewId) {
+            document.getElementById('view-home').classList.remove('active');
+            document.getElementById('view-notes').classList.remove('active');
+            document.getElementById('view-quiz').classList.remove('active');
+            document.getElementById('view-ai').classList.remove('active');
+            document.getElementById('btn-nav-home').className = "flex flex-col items-center gap-1 text-slate-400";
+            document.getElementById('btn-nav-notes').className = "flex flex-col items-center gap-1 text-slate-400";
+            document.getElementById('btn-nav-quiz').className = "flex flex-col items-center gap-1 text-slate-400";
+            document.getElementById('btn-nav-ai').className = "flex flex-col items-center gap-1 text-slate-400";
+            document.getElementById('view-' + viewId).classList.add('active');
+            document.getElementById('btn-nav-' + viewId).className = "flex flex-col items-center gap-1 text-emerald-400";
+            window.scrollTo(0, 0);
+        }
 
+        function openLibrary(subject) {
+            currentSubject = subject; switchTab('notes');
+            document.getElementById('subject-title').innerText = subject.toUpperCase() + " Study Panel";
+            const targetUrl = selfStudyLinks[subject] || "https://www.selfstudys.com";
+            document.getElementById('self-study-banner').innerHTML = `
+                <p class="text-xs text-slate-300 mb-2">📚 Direct 12th RBSE SelfStudys Material Open Karein:</p>
+                <a href="${targetUrl}" target="_blank" class="inline-block bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-md">
+                    <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Open Official SelfStudys Link
+                </a>
+            `;
+            const container = document.getElementById('chapters-list-container'); container.innerHTML = "";
+            const chapters = masterSyllabusIndex[subject];
+            for (let i = 0; i < chapters.length; i++) {
+                const chName = chapters[i]; const foundCh = studyDatabase[subject].find(c => c.title.toLowerCase() === chName.toLowerCase());
+                let innerContent = ""; let quizBtn = "";
+                if(foundCh) {
+                    innerContent = `
+                        <div class="mt-3 pt-3 border-t border-slate-700/40 space-y-2">
+                            <div class="bg-slate-900/60 p-2.5 rounded-xl border border-slate-700/40"><span class="text-[11px] font-bold text-amber-400 block">Key Point/Formula:</span><code class="text-xs text-emerald-300 block font-mono mt-0.5">${foundCh.formula}</code></div>
+                            <div class="text-xs text-slate-400 bg-slate-900/30 p-2.5 rounded-xl leading-relaxed"><span class="font-bold text-slate-300 block mb-0.5">Quick Revision:</span>${foundCh.notes}</div>
+                        </div>
+                    `;
+                    quizBtn = `<button onclick="startQuiz('${subject}', '${chName}')" class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs px-3 py-1.5 rounded-xl font-bold">Take Quiz</button>`;
+                }
+                container.innerHTML += `
+                    <div class="bg-slate-800 border border-slate-700/50 p-4 rounded-2xl shadow-md">
+                        <div class="flex justify-between items-start gap-2">
+                            <div><span class="text-[10px] uppercase font-bold text-slate-500 font-mono">Chapter ${i+1}</span><h3 class="text-sm font-bold text-white mt-0.5">${chName}</h3></div>
+                            <div class="flex gap-2">${quizBtn}<button onclick="openAiChat('${subject}', '${chName}')" class="bg-purple-600/20 text-purple-300 border border-purple-500/30 text-xs px-3 py-1.5 rounded-xl font-bold">Ask AI</button></div>
+                        </div>
+                        ${innerContent}
+                    </div>
+                `;
+            }
+        }
+
+        function startQuiz(subject, chapter) {
+            const foundCh = studyDatabase[subject].find(c => c.title.toLowerCase() === chapter.toLowerCase());
+            if(!foundCh || !foundCh.quiz) return;
+            ActiveQuizQuestions = foundCh.quiz; switchTab('quiz');
+            document.getElementById('quiz-context').innerText = chapter;
+            document.getElementById('quiz-submit-btn').classList.remove('hidden');
+            const container = document.getElementById('quiz-questions-container'); container.innerHTML = "";
+            for (let i = 0; i < ActiveQuizQuestions.length; i++) {
+                const qObj = ActiveQuizQuestions[i]; let optionsHTML = "";
+                for (let j = 0; j < qObj.a.length; j++) {
+                    optionsHTML += `<label class="flex items-center gap-3 bg-slate-900/60 border border-slate-700/60 p-3 rounded-xl cursor-pointer"><input type="radio" name="question-${i}" value="${j}" class="accent-amber-400 w-4 h-4"><span class="text-xs text-slate-200">${qObj.a[j]}</span></label>`;
+                }
+                container.innerHTML += `
+                    <div class="bg-slate-800 border border-slate-700/50 p-4 rounded-2xl space-y-3 shadow-md">
+                        <span class="text-[10px] bg-slate-900 text-slate-400 px-2 py-0.5 rounded font-mono">Question ${i+1}</span>
+                        <h3 class="text-sm font-bold text-white leading-relaxed">${qObj.q}</h3>
+                        <div class="grid grid-cols-1 gap-2 pt-1">${optionsHTML}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function submitQuiz() {
+            let totalScore = 0, correctCount = 0, wrongCount = 0, skippedCount = 0;
+            for (let i = 0; i < ActiveQuizQuestions.length; i++) {
+                const selectedOpt = document.querySelector(`input[name="question-${i}"]:checked`);
+                if(selectedOpt) {
+                    if(parseInt(selectedOpt.value) === ActiveQuizQuestions[i].correct) { correctCount++; totalScore += 4; } else { wrongCount++; totalScore -= 1; }
+                } else { skippedCount++; }
+            }
+            document.getElementById('quiz-submit-btn').classList.add('hidden');
+            document.getElementById('quiz-questions-container').innerHTML = `
+                <div class="bg-slate-800 border-2 border-emerald-500/40 p-6 rounded-2xl text-center space-y-4 shadow-lg">
+                    <div class="text-4xl font-extrabold text-amber-400 font-mono">${totalScore} <span class="text-xs text-slate-400 font-normal">Marks</span></div>
+                    <div class="grid grid-cols-3 gap-2 pt-2 text-xs">
+                        <div class="bg-slate-900 p-2 rounded-xl text-emerald-400 font-bold">Correct: ${correctCount}</div>
+                        <div class="bg-slate-900 p-2 rounded-xl text-rose-400 font-bold">Wrong: ${wrongCount; }</div>
+                        <div class="bg-slate-900 p-2 rounded-xl text-slate-400 font-bold">Left: ${skippedCount}</div>
+                    </div>
+                    <button onclick="switchTab('home')" class="w-full bg-slate-700 text-white text-xs py-2.5 rounded-xl font-bold mt-2">Back to Home</button>
+                </div>
+            `;
+        }
+
+        function openAiChat(subject, chapter) {
+            currentSubject = subject; currentChapter = chapter; switchTab('ai');
+            document.getElementById('ai-context').innerText = `Context: ${subject} | ${chapter}`;
+            document.getElementById('chat-box').innerHTML = `<div class="bg-slate-800 p-3 rounded-2xl max-w-[85%] border border-slate-700/50">Context Locked: <b>${chapter}</b>. Doubt poochiye!</div>`;
+        }
+
+        async function askAI() {
+            const queryInput = document.getElementById('user-query'); const query = queryInput.value.trim(); if(!query) return;
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += `<div class="bg-purple-600 text-white p-3 rounded-2xl max-w-[85%] ml-auto text-sm shadow-md">${query}</div>`;
+            queryInput.value = ""; chatBox.scrollTop = chatBox.scrollHeight;
+            const loadingId = "load-" + Date.now();
+            chatBox.innerHTML += `<div id="${loadingId}" class="bg-slate-800 p-3 rounded-2xl max-w-[85%] text-sm text-slate-400 italic">AI Guru typing...</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+            try {
+                const payload = { contents: [{ role: "user", parts: [{ text: `Provide precise answers for 12th Board/NEET. Subject: ${currentSubject}, Chapter: ${currentChapter}. Query: ${query}` }] }] };
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
+                });
+                const result = await response.json(); document.getElementById(loadingId).remove();
+                if (result.candidates && result.candidates[0].content.parts[0].text) {
+                    let textOut = result.candidates[0].content.parts[0].text;
+                    let cleanHTML = textOut.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>").replace(/\*(.*?)\*/g, "<i>$1</i>").replace(/\n/g, "<br>");
+                    chatBox.innerHTML += `<div class="bg-slate-800 p-3 rounded-2xl max-w-[85%] border border-slate-700/50 text-sm leading-relaxed">${cleanHTML}</div>`;
+                } else { chatBox.innerHTML += `<div class="bg-slate-800 p-3 rounded-2xl max-w-[85%] text-rose-400">Server response error.</div>`; }
+            } catch (error) { if(document.getElementById(loadingId)) document.getElementById(loadingId).remove(); chatBox.innerHTML += `<div class="bg-slate-800 p-3 rounded-2xl max-w-[85%] text-rose-400">Connection error.</div>`; }
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
 </body>
 </html>
+
